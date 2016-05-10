@@ -1,28 +1,122 @@
-# Compiled Object files
-*.slo
-*.lo
-*.o
-*.obj
+ 
+ /*--------------------------------------------------------------
+ - Hotspoter .
+ - C++ & CMD Commands .
+ - BFCI - Benha University .
+ = By Abdullah Hassan & Ahmed Yousef 
+ = 1st -  [7-5-2016]
+ --------------------------------------------------------------*/
+ 
+#include<iostream>
+#include <windows.h>
+#include <iomanip>
+using namespace std;
+int main ()
+{
+    while(1)
+    {
+        HANDLE hConsole = GetStdHandle(STD_OUTPUT_HANDLE);  //Color
+        SetConsoleTextAttribute(hConsole, 4);  //Color
+        cout<<"\n                            @@  @@@@@ @@ "<<endl;
+        cout<<"                @@  @@  @@      @@       "<<endl;
+        cout<<"                @@  @@  @@  @@  @@@@  @@ "<<endl;
+        cout<<"                @@ @@@@ @@  @@  @@    @@ "<<endl;
+        cout<<"                 @@@  @@@   @@  @@    @@ "<<endl;
+        cout<<"                  @@  @@    @@  @@    @@ "<<endl;
+        cout<<"_________________________________________________________"<<endl;
 
-# Precompiled Headers
-*.gch
-*.pch
+        char *x = new char[1000];
+        string y, pass, b;
+        //char a = ' ';
+        //  system("color a");
+        system("title WiFi HotSpoter v.1.0"); //Top Title
 
-# Compiled Dynamic libraries
-*.so
-*.dylib
-*.dll
+        SetConsoleTextAttribute(hConsole, 3); //color
+        cout <<"-------------------| HotsSpoter Menu |-------------------"<<endl;
+        SetConsoleTextAttribute(hConsole, 2); //color
+        cout << "[1] Create a Hotspot. \n[2] Start Hotspot. \n[3] Stop  Hotspot. \n[4] Show  Hotspot details. \n[5] About. \n[6] Exit."<<endl;
+        SetConsoleTextAttribute(hConsole, 3); //color
+        cout <<"========================================================="<<endl;
+        int ch ;
+        SetConsoleTextAttribute(hConsole, 6); //color
+        cout <<"Enter Choice (ex: 1,2,..) : ";
+        cin >>ch;
 
-# Fortran module files
-*.mod
+        switch (ch)
+        {
+        case 1:
+            cin.ignore();
+            b = "netsh wlan set hostednetwork mode=allow ssid= "; //CMD Command | set hosted network
+            SetConsoleTextAttribute(hConsole, 3);
+            cout <<"---------------------------------------------------------"<<endl;
+            cout <<"Enter Name: "; //SSID
+            getline(cin,y);
+            cout <<"Enter Password: "; //KEY
+            cin >>pass;
+            cout <<"---------------------------------------------------------"<<endl;
+            SetConsoleTextAttribute(hConsole, 6);
+            b+= "\"";
+            b+= y;
+            b+= "\"";
+            b+= " key =";
+            b+= pass;
 
-# Compiled Static libraries
-*.lai
-*.la
-*.a
-*.lib
+            //  for(int i=0 ; i<1000; i++)
+            //    x[i]='\0';
+            //for(int i=0 ; i<b.length(); i++)
+            x=&b[0];
+            // x++;
+            //   cout <<x<<endl; //(used for testing :D)
+            system(x);
+            SetConsoleTextAttribute(hConsole, 3);
+            cout <<"---------------------------------------------------------"<<endl;
+            break;
+        case 4 :
+            system("netsh wlan show hostednetwork");//CMD Command | show details
+            cout <<"---------------------------------------------------------"<<endl;
+            break;
+        case 2 :
 
-# Executables
-*.exe
-*.out
-*.app
+            SetConsoleTextAttribute(hConsole, 3);
+            cout <<"---------------------------------------------------------"<<endl;
+            system("netsh wlan start hostednetwork");//CMD Command | start
+            SetConsoleTextAttribute(hConsole, 3);
+            cout <<"---------------------------------------------------------"<<endl;
+            SetConsoleTextAttribute(hConsole, 4);
+            cout <<"**NOTICE** [to access internet] => Enable internet connection sharing."<<endl;
+            system ("control netconnections"); //CMD Command => open internet connection then USER mark on checkbox to access internet.
+            break;
+        case 3 :
+            system("netsh wlan stop hostednetwork"); //CMD Command | stop
+            //SetConsoleTextAttribute(hConsole, 3)
+            cout <<"---------------------------------------------------------"<<endl;
+            break;
+        case 5:
+
+            cout <<"--------------------------------------------------------"<<endl;
+
+            cout <<"Programmed By: \nAbdullah Hassan && Ahmed Yousef\n";
+
+            cout <<"---------------------------------------------------------"<<endl;
+            break;
+        case 6:
+            //  system("exit");
+            // break;
+            return 0;
+        default :
+            //  SetConsoleTextAttribute(hConsole, 3)
+            cout <<"---------------------------------------------------------"<<endl;
+            //  SetConsoleTextAttribute(hConsole, 4)
+            cout << "**Error** : Invalid choice" << endl;
+            // SetConsoleTextAttribute(hConsole, 3)
+            cout <<"---------------------------------------------------------"<<endl;
+
+        }
+        cin.ignore();
+        SetConsoleTextAttribute(hConsole, 4);
+        cout << "Press Enter for Menu....";
+        cin.get();
+        system("cls"); //CMD Command | clear
+    }
+    return 0;
+}
